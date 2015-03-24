@@ -18,8 +18,8 @@ class apt_cacher_ng::client (
     fail('Parameter $timeout is expected to be an integer value.')
   }
 
-  anchor { 'begin': } ->
+  anchor { 'begin_client': } ->
   class { 'apt_cacher_ng::client::config': } ->
-  anchor { 'end': }
+  anchor { 'end_client': }
 
 }
