@@ -4,6 +4,7 @@
 Vagrant::Config.run do |config|
   config.vm.define :aptcache do |aptcache|
     aptcache.vm.box = "lucid32"
+    aptcache.vm.box_url = "http://files.vagrantup.com/lucid32.box"
     aptcache.vm.host_name = "aptcache"
     aptcache.vm.share_folder "module", "/tmp/vagrant-puppet/modules/apt_cacher_ng", ".", :create => true
     aptcache.vm.network :hostonly, "192.168.31.42"
