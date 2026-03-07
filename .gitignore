@@ -1,2 +1,9 @@
+.bundle
 .vagrant
-vendor/
+/pkg
+/spec/fixtures
+/doc
+Gemfile.lock
+/.yardoc
+.librarian
+/vendor
