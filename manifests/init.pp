@@ -9,26 +9,20 @@
 #   Password set for the admin account
 #
 class apt_cacher_ng (
-  $version    = 'installed',
-  $admin_user = false,
-  $admin_pw   = false
+  String $version = 'installed',
+  Optional[String[1]] $admin_user = undef,
+  Optional[String[1]] $admin_pw = undef,
 ) {
-
-  if $admin_user != false and $admin_pw != false {
-    validate_string($admin_user)
-    validate_string($admin_pw)
-  }
-  else {
-    if ($admin_user != false and $admin_pw == false) or
-       ($admin_user == false and $admin_pw != false) {
-      fail('Please set either none or both of $admin_user and $admin_pw.')
-    }
+  $admin_info = [$admin_user, $admin_pw].filter |$v| { $v !~ Undef }
+  if $admin_info.size() == 1 {
+    fail('Please set either none or both of $admin_user and $admin_pw.')
   }
 
-  anchor { 'apt_cacher_ng::begin': }
-  -> class { 'apt_cacher_ng::install': }
+  contain apt_cacher_ng::install
+  contain apt_cacher_ng::config
+  contain apt_cacher_ng::service
+
+  class { 'apt_cacher_ng::install': }
   -> class { 'apt_cacher_ng::config': }
   ~> class { 'apt_cacher_ng::service': }
-  -> anchor { 'apt_cacher_ng::end': }
-
 }

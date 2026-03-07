@@ -6,7 +6,6 @@
 # @api private
 #
 class apt_cacher_ng::client::config {
-
   if ! $apt_cacher_ng::client::autodetect {
     include apt_cacher_ng::client::one_proxy
     class { 'apt_cacher_ng::client::autodetect':
@@ -19,5 +18,4 @@ class apt_cacher_ng::client::config {
     }
     include apt_cacher_ng::client::autodetect
   }
-
 }

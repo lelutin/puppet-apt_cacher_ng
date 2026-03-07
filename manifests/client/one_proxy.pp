@@ -9,9 +9,8 @@
 #   Set to absent to remove configuration files.
 #
 class apt_cacher_ng::client::one_proxy (
-  $ensure = present
+  Enum['present', 'absent'] $ensure = present
 ) {
-
   $server = $apt_cacher_ng::client::servers[0]
   file { '/etc/apt/apt.conf.d/71proxy':
     ensure  => $ensure,
@@ -20,5 +19,4 @@ class apt_cacher_ng::client::one_proxy (
     group   => 0,
     mode    => '0644',
   }
-
 }

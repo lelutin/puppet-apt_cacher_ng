@@ -9,9 +9,8 @@
 #   Set to absent to remove configuration files.
 #
 class apt_cacher_ng::client::autodetect (
-  $ensure = present
+  Enum['present', 'absent'] $ensure = present
 ) {
-
   file { '/etc/apt/apt.conf.d/30detectproxy':
     ensure => $ensure,
     source => 'puppet:///modules/apt_cacher_ng/30detectproxy',
@@ -38,5 +37,4 @@ class apt_cacher_ng::client::autodetect (
     group   => 0,
     mode    => '0644',
   }
-
 }
