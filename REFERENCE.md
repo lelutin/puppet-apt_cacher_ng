@@ -6,21 +6,26 @@
 
 ### Classes
 
-* [`apt_cacher_ng`](#apt_cacher_ng)
-* [`apt_cacher_ng::client`](#apt_cacher_ng--client)
-* [`apt_cacher_ng::client::autodetect`](#apt_cacher_ng--client--autodetect)
-* [`apt_cacher_ng::client::config`](#apt_cacher_ng--client--config)
-* [`apt_cacher_ng::client::one_proxy`](#apt_cacher_ng--client--one_proxy)
-* [`apt_cacher_ng::client::params`](#apt_cacher_ng--client--params)
-* [`apt_cacher_ng::config`](#apt_cacher_ng--config)
-* [`apt_cacher_ng::install`](#apt_cacher_ng--install)
-* [`apt_cacher_ng::service`](#apt_cacher_ng--service)
+#### Public Classes
+
+* [`apt_cacher_ng`](#apt_cacher_ng): Setup apt-cacher-ng proxy service
+* [`apt_cacher_ng::client`](#apt_cacher_ng--client): Configure host as a proxy client
+
+#### Private Classes
+
+* `apt_cacher_ng::client::autodetect`: Setup proxy autodetection for proxy client
+* `apt_cacher_ng::client::config`: Configure host as a proxy client
+* `apt_cacher_ng::client::one_proxy`: Setup single-server proxy client configuration
+* `apt_cacher_ng::client::params`: Parameter default values
+* `apt_cacher_ng::config`: Configure apt-cacher-ng service
+* `apt_cacher_ng::install`: Install apt-cacher-ng
+* `apt_cacher_ng::service`: Setup apt-cacher-ng service
 
 ## Classes
 
 ### <a name="apt_cacher_ng"></a>`apt_cacher_ng`
 
-The apt_cacher_ng class.
+Setup apt-cacher-ng proxy service
 
 #### Parameters
 
@@ -32,31 +37,32 @@ The following parameters are available in the `apt_cacher_ng` class:
 
 ##### <a name="-apt_cacher_ng--version"></a>`version`
 
-Data type: `Any`
+Data type: `String`
 
-
+Version tag passed to the package resource to specify an installed package
+version.
 
 Default value: `'installed'`
 
 ##### <a name="-apt_cacher_ng--admin_user"></a>`admin_user`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
+Username for the admin account
 
-
-Default value: `false`
+Default value: `undef`
 
 ##### <a name="-apt_cacher_ng--admin_pw"></a>`admin_pw`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
+Password set for the admin account
 
-
-Default value: `false`
+Default value: `undef`
 
 ### <a name="apt_cacher_ng--client"></a>`apt_cacher_ng::client`
 
-The apt_cacher_ng::client class.
+Configure host as a proxy client
 
 #### Parameters
 
@@ -69,89 +75,37 @@ The following parameters are available in the `apt_cacher_ng::client` class:
 
 ##### <a name="-apt_cacher_ng--client--servers"></a>`servers`
 
-Data type: `Any`
+Data type: `Array[String[1], 1]`
 
-
+List of proxy servers used by the client apt. Setting more than one value is
+only useful when `autodetect` is set to true.
 
 Default value: `$apt_cacher_ng::client::params::servers`
 
 ##### <a name="-apt_cacher_ng--client--autodetect"></a>`autodetect`
 
-Data type: `Any`
+Data type: `Boolean`
 
-
+If true, the apt client will try all $servers in turn and use the first one
+that responds.
 
 Default value: `$apt_cacher_ng::client::params::autodetect`
 
 ##### <a name="-apt_cacher_ng--client--verbose"></a>`verbose`
 
-Data type: `Any`
+Data type: `Boolean`
 
-
+If false, proxy autodetection will not be logged. Only useful if `autodetect`
+is set to true.
 
 Default value: `$apt_cacher_ng::client::params::verbose`
 
 ##### <a name="-apt_cacher_ng--client--timeout"></a>`timeout`
 
-Data type: `Any`
+Data type: `Integer[1]`
 
-
+Number of seconds after which a proxy is considered unresponsive during
+autodetection. This parameter is unused when `autodetect` is set to false.
 
 Default value: `$apt_cacher_ng::client::params::timeout`
-
-### <a name="apt_cacher_ng--client--autodetect"></a>`apt_cacher_ng::client::autodetect`
-
-The apt_cacher_ng::client::autodetect class.
-
-#### Parameters
-
-The following parameters are available in the `apt_cacher_ng::client::autodetect` class:
-
-* [`ensure`](#-apt_cacher_ng--client--autodetect--ensure)
-
-##### <a name="-apt_cacher_ng--client--autodetect--ensure"></a>`ensure`
-
-Data type: `Any`
-
-
-
-Default value: `present`
-
-### <a name="apt_cacher_ng--client--config"></a>`apt_cacher_ng::client::config`
-
-The apt_cacher_ng::client::config class.
-
-### <a name="apt_cacher_ng--client--one_proxy"></a>`apt_cacher_ng::client::one_proxy`
-
-The apt_cacher_ng::client::one_proxy class.
-
-#### Parameters
-
-The following parameters are available in the `apt_cacher_ng::client::one_proxy` class:
-
-* [`ensure`](#-apt_cacher_ng--client--one_proxy--ensure)
-
-##### <a name="-apt_cacher_ng--client--one_proxy--ensure"></a>`ensure`
-
-Data type: `Any`
-
-
-
-Default value: `present`
-
-### <a name="apt_cacher_ng--client--params"></a>`apt_cacher_ng::client::params`
-
-The apt_cacher_ng::client::params class.
-
-### <a name="apt_cacher_ng--config"></a>`apt_cacher_ng::config`
-
-The apt_cacher_ng::config class.
-
-### <a name="apt_cacher_ng--install"></a>`apt_cacher_ng::install`
-
-The apt_cacher_ng::install class.
-
-### <a name="apt_cacher_ng--service"></a>`apt_cacher_ng::service`
-
-The apt_cacher_ng::service class.
 
