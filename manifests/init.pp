@@ -1,3 +1,13 @@
+# @summary Setup apt-cacher-ng proxy service
+#
+# @param version
+#   Version tag passed to the package resource to specify an installed package
+#   version.
+# @param admin_user
+#   Username for the admin account
+# @param admin_pw
+#   Password set for the admin account
+#
 class apt_cacher_ng (
   $version    = 'installed',
   $admin_user = false,

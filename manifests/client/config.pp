@@ -1,3 +1,10 @@
+# This class should not be included directly. Users must use the
+# `apt_cacher_ng::client` class.
+#
+# @summary Configure host as a proxy client
+#
+# @api private
+#
 class apt_cacher_ng::client::config {
 
   if ! $apt_cacher_ng::client::autodetect {

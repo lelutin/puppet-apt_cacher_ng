@@ -1,3 +1,10 @@
+# This class should not be included directly. Users must use the `apt_cacher_ng`
+# class.
+#
+# @summary Configure apt-cacher-ng service
+#
+# @api private
+#
 class apt_cacher_ng::config {
 
   file { '/etc/apt-cacher-ng/acng.conf':

@@ -1,3 +1,18 @@
+# @summary Configure host as a proxy client
+#
+# @param servers
+#   List of proxy servers used by the client apt. Setting more than one value is
+#   only useful when `autodetect` is set to true.
+# @param autodetect
+#   If true, the apt client will try all $servers in turn and use the first one
+#   that responds.
+# @param verbose
+#   If false, proxy autodetection will not be logged. Only useful if `autodetect`
+#   is set to true.
+# @param timeout
+#   Number of seconds after which a proxy is considered unresponsive during
+#   autodetection. This parameter is unused when `autodetect` is set to false.
+#
 class apt_cacher_ng::client (
   $servers = $apt_cacher_ng::client::params::servers,
   $autodetect = $apt_cacher_ng::client::params::autodetect,
